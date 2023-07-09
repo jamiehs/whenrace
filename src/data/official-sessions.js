@@ -263,6 +263,7 @@ const officials = [
         cars: ["Silver Crown"],
         links: {
             discord: 'https://discord.gg/6P4HknQKZ8',
+            broadcast: 'https://www.youtube.com/@NationalRacingNetwork/streams',
         },
         sessions: [
             {
