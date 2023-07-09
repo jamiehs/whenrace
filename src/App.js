@@ -32,6 +32,9 @@ const App = () => {
                 case 'facebook':
                     linkLabel = 'Facebook: '
                     break;
+                default:
+                    linkLabel = <LinkIcon />
+                    labelClasses = "svg www"
             }
             return (
                 <div key={key} className="link-row">

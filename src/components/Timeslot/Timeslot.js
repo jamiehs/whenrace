@@ -27,7 +27,6 @@ class Timeslot extends React.Component {
             dayIndex,
             time,
             notes,
-            children,
         } = this.props
     
         const tz = moment.tz.guess()
