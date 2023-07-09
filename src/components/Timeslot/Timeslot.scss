@@ -1,0 +1,65 @@
+@import '../../_global.scss';
+
+.Timeslot {
+    display: block;
+    margin-bottom: 0.3rem;
+    padding: 0.5rem 1rem;
+    margin-left: -1rem;
+    margin-right: -1rem;
+
+    &.has-notes {
+        background-color: rgb(18,18,18);
+    }
+
+    h3 {
+        margin: 0;
+    }
+
+    .timeslot-date {
+
+        .date-gmt,
+        .date-local {
+            display: flex;
+            margin-right: 2em;
+        }
+
+        .date-label {
+            margin-left: 0.33em;
+        }
+
+        .date-gmt {
+            font-size: 60%;
+        }
+
+        .date-local {
+            display: flex;
+            align-items: center;
+            .date-label {
+                display: none;
+                font-size: 50%;
+                padding: 0 0.5em;
+                background-color: rgb(213, 213, 213);
+                border-radius: 1em;
+                height: 1.2rem;
+                line-height: 1.2rem;
+            }
+        }
+
+    }
+
+    .timeslot-info {
+        padding-top: 0.33em;
+        font-size: 50%;
+        .note {
+            background-color: rgb(107, 107, 107);
+            color: white;
+            display: inline-block;
+            padding: 0 0.25em;
+            line-height: 1.3em;
+            height: 1.3em;
+            border-radius: 2px;
+            margin-inline-end: 0.33em;
+        }
+    }
+
+}

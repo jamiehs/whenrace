@@ -1,0 +1,134 @@
+@import '_global.scss';
+
+body {
+  background: black;
+  color: white;
+  font-family: Inter, Roboto, 'Helvetica Neue', 'Arial Nova', 'Nimbus Sans', Arial, sans-serif;
+}
+
+a, a:link {
+  color: white;
+}
+
+#nameplate {
+  background-color: #fff;
+  display: flex;
+  align-items: center;
+
+  #nameplate-content {
+    flex: 1;
+    h1 {
+      position: relative;
+      margin: 0;
+      font-size: 6vw;
+      color: black;
+      font-weight: 900;
+      text-align: center;
+      left: -60px;
+    }
+  }
+}
+
+.series-selector {
+  padding: 0.5em;
+
+  a, a:link {
+      display: inline-block;
+      padding: 0 0.5em;
+      line-height: 1.5em;
+      height: 1.5em;
+      font-size: 4.4vw;
+      margin-inline-end: 0.33em;
+      margin-bottom: 0.33em;
+      border-radius: 4px;
+      font-weight: 500;
+      background-color: rgb(26, 26, 26);
+      text-decoration: none;
+      color: white;
+
+      &.selected {
+        color: black;
+        background-color: rgb(226, 226, 226);
+      }
+  }
+}
+
+.cars {
+  font-size: 3.2vw;
+  margin-bottom: 0.5em;
+}
+
+.links {
+  font-size: 3.7vw;
+
+  a {
+    display: inline-block;
+    margin-inline-end: 0.4em;
+  }
+  .link-row {
+    display: flex;
+    align-items: center;
+    margin-bottom: 0.25em;
+    .label-type {
+      position: relative;
+      top: 0.1em;
+      margin-right: 0.55em;
+
+      &.svg {
+        display: inline-block;
+        height: 1em;
+        svg {
+          width: 1em;
+          height: 1em;
+          path {
+            fill: white;
+          }
+        }
+      }
+    }
+  }
+}
+
+.series-list {
+  padding: 1rem;
+
+  .series {
+    margin-bottom: 5em;
+  
+    h2 {
+      margin: 0;
+      font-size: 5.7vw;
+    }
+  
+    .cars {
+      .car {
+        display: inline-block;
+        margin-inline-end: 0.4em;
+  
+        &:after {
+          content: ', ';
+        }
+  
+        &:last-child {
+          &:after {
+            content: '';
+          }
+        }
+      }
+    }
+
+    .official-sessions {
+      font-size: 5vw;
+      font-weight: 600;
+      display: block;
+      margin-top: 1em;
+      margin-bottom: 0.5em;
+    }
+    
+    .timeslots {
+      font-size: 5.5vw;
+    }
+
+  }
+}
+
