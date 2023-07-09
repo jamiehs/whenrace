@@ -53,53 +53,55 @@ const App = () => {
                     <h1>When Race?</h1>
                 </div>
             </header>
-            <div className="series-selector">
-                <Link key="all" to="/" className={`${selected_series ? '' : 'selected'}`}>
-                    All Series
-                </Link>
-                {sortedOfficials.map(series => {
-                    return (
-                        <NavLink key={`${series.seriesId}`} to={series.seriesId} activeClassName="selected">
-                            {series.shortLabel}
-                        </NavLink>
-                    )
-                })}
-            </div>
-            <div className="series-list">
-                {filteredOfficials.map(series => {
-                    return (
-                        <div key={`${series.seriesId}`} className="series">
-                            <header>
-                                <h2>{series.label}</h2>
-                                <div className="cars">
-                                    {series.cars.map(car => <span key={`car.${car}`} className="car">{car}</span>)}
-                                </div>
-                                {series.links && Object.keys(series.links).length > 0 && (
-                                    <div className="links">
-                                        {renderLinks(series.links)}
+            <div className="main-content">
+                <div className="series-selector">
+                    <Link key="all" to="/" className={`${selected_series ? '' : 'selected'}`}>
+                        All Series
+                    </Link>
+                    {sortedOfficials.map(series => {
+                        return (
+                            <NavLink key={`${series.seriesId}`} to={series.seriesId} activeClassName="selected">
+                                {series.shortLabel}
+                            </NavLink>
+                        )
+                    })}
+                </div>
+                <div className="series-list">
+                    {filteredOfficials.map(series => {
+                        return (
+                            <div key={`${series.seriesId}`} className="series">
+                                <header>
+                                    <h2>{series.label}</h2>
+                                    <div className="cars">
+                                        {series.cars.map(car => <span key={`car.${car}`} className="car">{car}</span>)}
                                     </div>
-                                )}
-                            </header>
+                                    {series.links && Object.keys(series.links).length > 0 && (
+                                        <div className="links">
+                                            {renderLinks(series.links)}
+                                        </div>
+                                    )}
+                                </header>
 
-                            <span className="official-sessions">
-                                Official Sessions:
-                            </span>
+                                <span className="official-sessions">
+                                    Official Sessions:
+                                </span>
 
-                            <div className="timeslots">
-                                {series.sessions.map(session => {
-                                    return (
-                                        <Timeslot
-                                            key={`${session.sessionDay}.${session.sessionTimeGmt}`}
-                                            dayIndex={session.sessionDay}
-                                            time={session.sessionTimeGmt}
-                                            notes={session.notes}
-                                        />
-                                    )
-                                })}
-                            </div>
-                        </div> 
-                    )
-                })}
+                                <div className="timeslots">
+                                    {series.sessions.map(session => {
+                                        return (
+                                            <Timeslot
+                                                key={`${session.sessionDay}.${session.sessionTimeGmt}`}
+                                                dayIndex={session.sessionDay}
+                                                time={session.sessionTimeGmt}
+                                                notes={session.notes}
+                                            />
+                                        )
+                                    })}
+                                </div>
+                            </div> 
+                        )
+                    })}
+                </div>
             </div>
         </div>
     )

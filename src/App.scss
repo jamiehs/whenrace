@@ -25,8 +25,18 @@ a, a:link {
       font-weight: 900;
       text-align: center;
       left: -60px;
+
+      @media (min-width: $medium-width) {
+        font-size: 50px;
+      }
+
     }
   }
+}
+
+.main-content {
+  max-width: 860px;
+  margin: 0 auto;
 }
 
 .series-selector {
@@ -46,6 +56,10 @@ a, a:link {
       text-decoration: none;
       color: white;
 
+      @media (min-width: $medium-width) {
+        font-size: 20px;
+      }
+  
       &.selected {
         color: black;
         background-color: rgb(226, 226, 226);
@@ -53,13 +67,12 @@ a, a:link {
   }
 }
 
-.cars {
-  font-size: 3.2vw;
-  margin-bottom: 0.5em;
-}
-
 .links {
   font-size: 3.7vw;
+
+  @media (min-width: $medium-width) {
+    font-size: 22px;
+  }
 
   a {
     display: inline-block;
@@ -98,9 +111,21 @@ a, a:link {
     h2 {
       margin: 0;
       font-size: 5.7vw;
+
+      @media (min-width: $medium-width) {
+        font-size: 30px;
+      }
+
     }
   
     .cars {
+      font-size: 3.2vw;
+      margin-bottom: 0.5em;
+    
+      @media (min-width: $medium-width) {
+        font-size: 18px;
+      }
+
       .car {
         display: inline-block;
         margin-inline-end: 0.4em;
@@ -123,10 +148,20 @@ a, a:link {
       display: block;
       margin-top: 1em;
       margin-bottom: 0.5em;
+
+      @media (min-width: $medium-width) {
+        font-size: 28px;
+      }
+
     }
     
     .timeslots {
       font-size: 5.5vw;
+
+      @media (min-width: $medium-width) {
+        font-size: 28px;
+      }
+
     }
 
   }
