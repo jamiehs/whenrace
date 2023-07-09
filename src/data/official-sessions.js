@@ -165,7 +165,14 @@ const officials = [
         shortLabel: 'Lotus 49',
         label: 'Grand Prix Legends',
         cars: ["Lotus 49"],
+        links: {
+            discord: 'https://discord.gg/PkZKSXBJSa'
+        },
         sessions: [
+            {
+                sessionDay: WED,
+                sessionTimeGmt: '23:30',
+            },
             {
                 sessionDay: THU,
                 sessionTimeGmt: '19:30',
@@ -186,7 +193,22 @@ const officials = [
         shortLabel: 'Lotus 79',
         label: 'Classic Lotus Grand Prix',
         cars: ["Lotus 79"],
+        links: {
+            discord: 'https://discord.gg/qjdNpSVChu'
+        },
         sessions: [
+            {
+                sessionDay: SAT,
+                sessionTimeGmt: '14:30',
+            },
+            {
+                sessionDay: SAT,
+                sessionTimeGmt: '16:30',
+            },
+            {
+                sessionDay: SUN,
+                sessionTimeGmt: '14:30',
+            },
             {
                 sessionDay: SUN,
                 sessionTimeGmt: '16:30',
