@@ -96,11 +96,11 @@ const officials = [
             },
             {
                 sessionDay: THU,
-                sessionTimeGmt: '20:45',
+                sessionTimeGmt: '18:45',
             },
             {
                 sessionDay: THU,
-                sessionTimeGmt: '22:45',
+                sessionTimeGmt: '20:45',
             },
         ]
     },
@@ -133,18 +133,9 @@ const officials = [
                 sessionDay: SAT,
                 sessionTimeGmt: '18:00',
             },
-        ]
-    },
-    {
-        seriesId: 'usf2k',
-        shortLabel: 'Open Wheel D',
-        label: 'US Open Wheel D USF 2000',
-        cars: ["USF 2000"],
-        sessions: [
             {
-                sessionDay: FRI,
-                sessionTimeGmt: '02:00',
-                notes: [BROADCAST, SOF]
+                sessionDay: SUN,
+                sessionTimeGmt: '20:00',
             },
         ]
     },
@@ -223,12 +214,61 @@ const officials = [
         cars: ["V8 Supercars"],
         sessions: [
             {
+                sessionDay: TUE,
+                sessionTimeGmt: '07:15',
+            },
+            {
                 sessionDay: FRI,
                 sessionTimeGmt: '01:15',
             },
             {
                 sessionDay: SAT,
                 sessionTimeGmt: '01:15',
+            },
+        ]
+    },
+    {
+        seriesId: 'spcc',
+        shortLabel: 'Sprint Car Cup',
+        label: 'Sprint Car Cup',
+        cars: ["Sprint Car"],
+        links: {
+            discord: 'https://discord.gg/22UBJ5j',
+        },
+        sessions: [
+            {
+                sessionDay: MON,
+                sessionTimeGmt: '01:00',
+            },
+            {
+                sessionDay: WED,
+                sessionTimeGmt: '01:00',
+                notes: [SOF]
+            },
+            {
+                sessionDay: FRI,
+                sessionTimeGmt: '01:00',
+            },
+            {
+                sessionDay: SUN,
+                sessionTimeGmt: '23:00',
+                notes: ["European SOF Session"]
+            },
+        ]
+    },
+    {
+        seriesId: 'silcc',
+        shortLabel: 'Silver Crown Cup',
+        label: 'Silver Crown Cup',
+        cars: ["Silver Crown"],
+        links: {
+            discord: 'https://discord.gg/6P4HknQKZ8',
+        },
+        sessions: [
+            {
+                sessionDay: TUE,
+                sessionTimeGmt: '01:45',
+                notes: [BROADCAST, SOF]
             },
         ]
     },
