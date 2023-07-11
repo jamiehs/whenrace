@@ -2,12 +2,12 @@
 
 body {
   background: black;
-  color: white;
+  color: $text-primary;
   font-family: Inter, Roboto, 'Helvetica Neue', 'Arial Nova', 'Nimbus Sans', Arial, sans-serif;
 }
 
 a, a:link {
-  color: white;
+  color: $text-primary;
 }
 
 #nameplate {
@@ -39,6 +39,15 @@ a, a:link {
   margin: 0 auto;
 }
 
+.problem-contribute {
+  padding: 0 1em;
+  font-size: 3.3vw;
+
+  @media (min-width: $medium-width) {
+    font-size: 14px;
+  }
+}
+
 .series-selector {
   padding: 0.5em;
 
@@ -54,15 +63,15 @@ a, a:link {
       font-weight: 500;
       background-color: rgb(26, 26, 26);
       text-decoration: none;
-      color: white;
+      color: $text-primary;
 
       @media (min-width: $medium-width) {
         font-size: 20px;
       }
   
       &.selected {
-        color: black;
-        background-color: rgb(226, 226, 226);
+        color: $background-primary;
+        background-color: $text-primary;
       }
   }
 }
@@ -94,7 +103,7 @@ a, a:link {
           width: 1em;
           height: 1em;
           path {
-            fill: white;
+            fill: $text-primary;
           }
         }
       }

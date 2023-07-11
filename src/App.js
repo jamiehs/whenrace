@@ -54,6 +54,11 @@ const App = () => {
                 </div>
             </header>
             <div className="main-content">
+                <div className="problem-contribute">
+                    <p>
+                        See something incorrect? <a href="mailto:admin@whenrace.com?subject=When%20Race%3F%20Contact&body=Just%20let%20me%20know%20what%20I%20can%20do%20to%20help%20%3A)%0D%0A%0D%0A">Send me an email</a>. Want to contribute? <a href="https://github.com/jamiehs/whenrace/blob/master/src/data/official-sessions.js" target="_blank" rel="noreferrer">The data is on GitHub</a>!
+                    </p>
+                </div>
                 <div className="series-selector">
                     <Link key="all" to="/" className={`${selected_series ? '' : 'selected'}`}>
                         All Series
