@@ -87,6 +87,34 @@ const officials = [
         ]
     },
     {
+        seriesId: 'usac-sprint',
+        shortLabel: 'USAC Sprint Car',
+        label: 'AMSOIL USAC Sprint Car - Fixed',
+        cars: ["Dirt Sprint Car - Non-Winged"],
+        sessions: [
+            {
+                sessionDay: TUE,
+                sessionTimeGmt: '01:45',
+            },
+            {
+                sessionDay: WED,
+                sessionTimeGmt: '01:45',
+            },
+        ]
+    },
+    {
+        seriesId: '360-sprint',
+        shortLabel: 'USAC 360 Sprint Car',
+        label: 'USAC 360 Sprint Car Series',
+        cars: ["Dirt Sprint Car - Non-Winged"],
+        sessions: [
+            {
+                sessionDay: TUE,
+                sessionTimeGmt: '00:45',
+            },
+        ]
+    },
+    {
         seriesId: 'srf',
         shortLabel: 'SRF Challenge',
         label: 'Spec Racer Ford Challenge',
