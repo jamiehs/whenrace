@@ -87,23 +87,27 @@ const App = () => {
                                     )}
                                 </header>
 
-                                <span className="official-sessions">
-                                    Official Sessions:
-                                </span>
+                                {series.sessions && series.sessions.length > 0 && (
+                                <>
+                                    <span className="official-sessions">
+                                        Official Sessions:
+                                    </span>
 
-                                <div className="timeslots">
-                                    {series.sessions.map(session => {
-                                        return (
-                                            <Timeslot
-                                                key={`${session.sessionDay}.${session.sessionTimeGmt}`}
-                                                dayIndex={session.sessionDay}
-                                                time={session.sessionTimeGmt}
-                                                notes={session.notes}
-                                            />
-                                        )
-                                    })}
-                                </div>
-                            </div> 
+                                    <div className="timeslots">
+                                        {series.sessions.map(session => {
+                                            return (
+                                                <Timeslot
+                                                    key={`${session.sessionDay}.${session.sessionTimeGmt}`}
+                                                    dayIndex={session.sessionDay}
+                                                    time={session.sessionTimeGmt}
+                                                    notes={session.notes}
+                                                />
+                                            )
+                                        })}
+                                    </div>
+                                </>
+                            )}
+                            </div>
                         )
                     })}
                 </div>
