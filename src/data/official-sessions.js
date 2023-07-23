@@ -306,8 +306,8 @@ const officials = [
     },
     {
         seriesId: 'gt4-fixed',
-        shortLabel: 'GT4 Falken Tyre Challenge - Fixed',
-        label: 'GT4 Falken Tyre Challenge ',
+        shortLabel: 'GT4 Fixed',
+        label: 'GT4 Falken Tyre Challenge - Fixed',
         cars: ["Mercedes-AMG GT4", "Porsche 718 Cayman GT4 Clubsport", "BMW M4 GT4", "McLaren 570S GT4", "Aston Martin Vantage GT4"],
         links: {
             discord: 'https://discord.gg/eeredmcx8G',
