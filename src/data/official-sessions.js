@@ -142,6 +142,10 @@ const officials = [
         cars: ["Chevrolet Cruze", "Toyota Corolla"],
         sessions: [
             {
+                sessionDay: SUN,
+                sessionTimeGmt: '17:45',
+            },
+            {
                 sessionDay: MON,
                 sessionTimeGmt: '19:45',
             },
