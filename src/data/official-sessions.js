@@ -140,6 +140,9 @@ const officials = [
         shortLabel: 'Stock Car Brasil',
         label: 'Stock Car Brasil',
         cars: ["Chevrolet Cruze", "Toyota Corolla"],
+        links: {
+            discord: 'https://discord.gg/45ZhNm6NRc'
+        },
         sessions: [
             {
                 sessionDay: SUN,
@@ -148,6 +151,7 @@ const officials = [
             {
                 sessionDay: MON,
                 sessionTimeGmt: '19:45',
+                notes: [SOF],
             },
         ]
     },
