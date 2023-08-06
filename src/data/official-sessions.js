@@ -259,10 +259,48 @@ const officials = [
             {
                 sessionDay: FRI,
                 sessionTimeGmt: '01:15',
+                notes: [SOF]
             },
             {
                 sessionDay: SAT,
                 sessionTimeGmt: '01:15',
+            },
+        ]
+    },
+    {
+        seriesId: 'v8sc-au',
+        shortLabel: 'Supercars AU',
+        label: 'Supercars Series Australian Server Only',
+        cars: ["V8 Supercars"],
+        sessions: [
+            {
+                sessionDay: SUN,
+                sessionTimeGmt: '10:15',
+            },
+            {
+                sessionDay: MON,
+                sessionTimeGmt: '10:15',
+                notes: [SOF],
+            },
+            {
+                sessionDay: TUE,
+                sessionTimeGmt: '10:15',
+            },
+            {
+                sessionDay: WED,
+                sessionTimeGmt: '10:15',
+            },
+            {
+                sessionDay: THU,
+                sessionTimeGmt: '10:15',
+            },
+            {
+                sessionDay: FRI,
+                sessionTimeGmt: '10:15',
+            },
+            {
+                sessionDay: SAT,
+                sessionTimeGmt: '10:15',
             },
         ]
     },
