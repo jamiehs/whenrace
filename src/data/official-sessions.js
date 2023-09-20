@@ -119,6 +119,9 @@ const officials = [
         shortLabel: 'SRF Challenge',
         label: 'Spec Racer Ford Challenge',
         cars: ["SCCA Spec Racer Ford"],
+        links: {
+            discord: 'https://discord.gg/tzD4KhwRj3'
+        },
         sessions: [
             {
                 sessionDay: TUE,
@@ -132,6 +135,7 @@ const officials = [
             {
                 sessionDay: THU,
                 sessionTimeGmt: '20:45',
+                notes: [SOF]
             },
         ]
     },
