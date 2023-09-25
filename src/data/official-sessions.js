@@ -120,7 +120,7 @@ const officials = [
         label: 'Spec Racer Ford Challenge',
         cars: ["SCCA Spec Racer Ford"],
         links: {
-            discord: 'https://discord.gg/tzD4KhwRj3'
+            discord: 'https://discord.gg/m8MKZA7bhK'
         },
         sessions: [
             {
