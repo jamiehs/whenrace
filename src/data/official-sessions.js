@@ -68,6 +68,22 @@ const officials = [
         ]
     },
     {
+        seriesId: 'clio',
+        shortLabel: 'Clio Cup',
+        label: 'Clio Cup - Fixed',
+        cars: ["Renault Clio"],
+        links: {
+            discord: 'https://discord.gg/SJtRvbMByA',
+        },
+        sessions: [
+            {
+                sessionDay: WED,
+                sessionTimeGmt: '20:00',
+                notes: [SOF]
+            },
+        ]
+    },
+    {
         seriesId: 'mission',
         shortLabel: 'Mission R',
         label: 'Mission R Challenge',
