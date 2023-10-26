@@ -89,7 +89,7 @@ const officials = [
         label: 'Mission R Challenge',
         cars: ["Porsche Mission R"],
         links: {
-            discord: 'https://discord.gg/3e4qx5jZ5'
+            discord: 'https://discord.gg/MCpA6Jktu'
         },
         sessions: [
             {
