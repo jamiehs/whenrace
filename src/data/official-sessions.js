@@ -99,6 +99,7 @@ const officials = [
             {
                 sessionDay: SUN,
                 sessionTimeGmt: '19:00',
+                notes: [SOF, BROADCAST]
             },
         ]
     },
