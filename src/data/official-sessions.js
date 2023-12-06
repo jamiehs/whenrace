@@ -13,8 +13,8 @@ const BROADCAST = "Broadcasted"
 const officials = [
     {
         seriesId: 'kamel',
-        shortLabel: 'Kamel GT',
-        label: 'Kamel GT Championship',
+        shortLabel: 'IMSA Vintage',
+        label: 'IMSA Vintage Series',
         cars: ["Audi 90 GTO", "Nissan ZX-Turbo GTP"],
         links: {
             website: 'https://kamelgt.com',
