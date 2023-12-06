@@ -50,8 +50,8 @@ const officials = [
     },
     {
         seriesId: 'gtc',
-        shortLabel: 'GT Challenge',
-        label: 'GT Challenge',
+        shortLabel: 'Proto-GT Challenge',
+        label: 'Proto-GT Thrustmaster Challenge',
         cars: ["Aston Martin DBR9 GT1", "Corvette C6.R GT1", "Ford GT GT2"],
         links: {
             discord: 'https://discord.gg/jWCPZ8dtnB',
