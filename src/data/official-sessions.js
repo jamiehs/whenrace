@@ -95,7 +95,7 @@ const officials = [
         sessions: [
             {
                 sessionDay: THU,
-                sessionTimeGmt: '19:00',
+                sessionTimeGmt: '21:00',
             },
             {
                 sessionDay: SUN,
