@@ -78,7 +78,7 @@ const officials = [
         sessions: [
             {
                 sessionDay: WED,
-                sessionTimeGmt: '20:00',
+                sessionTimeGmt: '19:00',
                 notes: [SOF]
             },
         ]
