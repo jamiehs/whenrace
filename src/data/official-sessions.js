@@ -218,7 +218,7 @@ const officials = [
         label: 'Grand Prix Legends',
         cars: ["Lotus 49"],
         links: {
-            discord: 'https://discord.gg/PkZKSXBJSa'
+            discord: 'https://discord.gg/YnXPTatwzd'
         },
         sessions: [
             {
