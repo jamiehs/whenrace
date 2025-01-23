@@ -218,7 +218,8 @@ const officials = [
         label: 'Grand Prix Legends',
         cars: ["Lotus 49"],
         links: {
-            discord: 'https://discord.gg/YnXPTatwzd'
+            discord: 'https://discord.gg/YnXPTatwzd',
+            broadcast: 'https://youtube.com/playlist?list=PL2b2Wswly5Jl8f3IxSXJLzaWoEA1T5p84',
         },
         sessions: [
             {
