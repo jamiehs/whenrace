@@ -383,6 +383,22 @@ const officials = [
         },
         sessions: []
     },
+        {
+        seriesId: 'ff1600-open',
+        shortLabel: 'FF1600 Open',
+        label: 'Motorsport UK FF 1600 Trophy by Thrustmaster',
+        cars: ["Ray FF1600"],
+        links: {
+            discord: 'https://discord.gg/QZRYvUdYJ6',
+        },
+        sessions: [
+            {
+                sessionDay: FRI,
+                sessionTimeGmt: '20:45',
+                notes: [BROADCAST, SOF]
+            },
+        ]
+    },
 ]
 
 export {
