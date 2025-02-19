@@ -393,7 +393,7 @@ const officials = [
         },
         sessions: [
             {
-                sessionDay: FRI,
+                sessionDay: MON,
                 sessionTimeGmt: '20:45',
                 notes: [BROADCAST, SOF]
             },
