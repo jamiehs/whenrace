@@ -396,6 +396,30 @@ const officials = [
                 sessionDay: MON,
                 sessionTimeGmt: '20:45',
                 notes: [BROADCAST, SOF]
+            }
+        ]
+    },
+    {
+        seriesId: 'tcr',
+        shortLabel: 'TCR',
+        label: 'TCR Virtual Challenge',
+        cars: ["Audi RS3 LMS", "Hyundai Elantra N", "Honda Civic Type R", "Hyundai Veloster N"],
+        links: {
+            discord: 'https://discord.gg/C6HzstakDy',
+        },
+        sessions: [
+            {
+                sessionDay: TUE,
+                sessionTimeGmt: '17:45',
+            },
+            {
+                sessionDay: TUE,
+                sessionTimeGmt: '19:45',
+                notes: [SOF]
+            },
+            {
+                sessionDay: TUE,
+                sessionTimeGmt: '21:45',
             },
         ]
     },
