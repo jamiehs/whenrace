@@ -133,6 +133,23 @@ const officials = [
         ]
     },
     {
+        seriesId: 'gr86',
+        shortLabel: 'GR86',
+        label: 'Toyota GR86 Cup - Fixed',
+        cars: ["Toyota GR86"],
+        links: {
+            discord: 'https://discord.gg/a8Wvu4eVXp',
+            broadcast: 'https://www.youtube.com/@tx141/videos'
+        },
+        sessions: [
+            {
+                sessionDay: SAT,
+                sessionTimeGmt: '20:45',
+                notes: [SOF]
+            },
+        ]
+    },
+    {
         seriesId: 'srf',
         shortLabel: 'SRF Challenge',
         label: 'Spec Racer Ford Challenge',
