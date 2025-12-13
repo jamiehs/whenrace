@@ -89,8 +89,7 @@ const officials = [
         label: 'Mission R Challenge',
         cars: ["Porsche Mission R"],
         links: {
-            discord: 'https://discord.gg/Wazet8mNeR',
-            broadcast: 'https://youtube.com/playlist?list=PLlCIL8qLkBnzquG5CV1tyM-2wFpGKvnMG',
+            discord: 'https://discord.gg/Wazet8mNeR'
         },
         sessions: [
             {
@@ -100,7 +99,7 @@ const officials = [
             {
                 sessionDay: SUN,
                 sessionTimeGmt: '19:00',
-                notes: [SOF, BROADCAST]
+                notes: [SOF]
             },
         ]
     },
