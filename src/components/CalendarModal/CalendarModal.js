@@ -1,24 +1,33 @@
 import { useState, useMemo } from 'react';
 import moment from 'moment-timezone';
 import './CalendarModal.scss';
-import { downloadCalendar, isSpecialSession, parseTime, toIsoWeekday } from '../../lib/calendar-helpers.js';
+import { downloadCalendar, getSessionId, isSpecialSession, parseTime, toIsoWeekday } from '../../lib/calendar-helpers.js';
 import { ReactComponent as CalendarIcon } from '../../images/calendar.svg';
 
-const getSessionId = (session) => `${session.sessionDay}-${session.sessionTimeGmt}`;
-
 const CalendarModal = ({ series, onClose }) => {
-    // Pre-select Broadcasted and SOF sessions
+    // Pre-select Broadcasted and SOF sessions, or all sessions if there's only 1
     const defaultSelected = useMemo(() => {
         const defaults = new Set();
-        series.sessions.forEach(session => {
-            if (isSpecialSession(session)) {
-                defaults.add(getSessionId(session));
-            }
-        });
+
+        // If there's only 1 session, select it by default
+        if (series.sessions.length === 1) {
+            defaults.add(getSessionId(series.sessions[0]));
+        } else {
+            // Otherwise, pre-select Broadcasted and SOF sessions
+            series.sessions.forEach(session => {
+                if (isSpecialSession(session)) {
+                    defaults.add(getSessionId(session));
+                }
+            });
+        }
+
         return defaults;
     }, [series.sessions]);
 
     const [selectedSessions, setSelectedSessions] = useState(defaultSelected);
+
+    // Check if all sessions are selected
+    const allSelected = selectedSessions.size > 0 && selectedSessions.size === series.sessions.length;
 
     const toggleSession = (sessionId) => {
         const newSet = new Set(selectedSessions);
@@ -30,13 +39,18 @@ const CalendarModal = ({ series, onClose }) => {
         setSelectedSessions(newSet);
     };
 
-    const selectAll = () => {
-        const allSessionIds = series.sessions.map(getSessionId);
-        setSelectedSessions(new Set(allSessionIds));
-    };
+    const toggleSelectAll = (e) => {
+        // Blur the button to prevent it from staying focused on iOS
+        e.currentTarget.blur();
 
-    const selectNone = () => {
-        setSelectedSessions(new Set());
+        if (allSelected) {
+            // If all are selected, deselect all
+            setSelectedSessions(new Set());
+        } else {
+            // Otherwise, select all
+            const allSessionIds = series.sessions.map(getSessionId);
+            setSelectedSessions(new Set(allSessionIds));
+        }
     };
 
     const handleDownload = () => {
@@ -54,7 +68,7 @@ const CalendarModal = ({ series, onClose }) => {
     };
 
     // Convert GMT times to user's local time (memoized per session)
-    const localTimeInfoMap = useMemo(() => {
+    const sessionTimeMap = useMemo(() => {
         const map = new Map();
         const userTimezone = moment.tz.guess();
 
@@ -89,16 +103,19 @@ const CalendarModal = ({ series, onClose }) => {
                 <div className="calendar-modal-content">
                     <p>Select sessions to add to your calendar. Sessions will repeat weekly for 1 year from today.</p>
 
-                    <div className="select-buttons">
-                        <button onClick={selectAll}>Select All</button>
-                        <button onClick={selectNone}>Select None</button>
-                    </div>
+                    {series.sessions.length > 1 && (
+                        <div className="select-buttons">
+                            <button onClick={toggleSelectAll}>
+                                {allSelected ? 'Deselect All' : 'Select All'}
+                            </button>
+                        </div>
+                    )}
 
                     <div className="sessions-list">
                         {series.sessions.map(session => {
                             const sessionId = getSessionId(session);
                             const isSelected = selectedSessions.has(sessionId);
-                            const timeInfo = localTimeInfoMap.get(sessionId);
+                            const timeInfo = sessionTimeMap.get(sessionId);
 
                             return (
                                 <label key={sessionId} className="session-item">

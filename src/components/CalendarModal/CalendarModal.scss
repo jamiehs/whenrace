@@ -1,5 +1,42 @@
 @import '../../_global.scss';
 
+// Shared button styles for modal buttons
+%modal-button-base {
+    display: inline-block;
+    padding: 0 0.5em;
+    line-height: 1.5em;
+    height: 1.5em;
+    font-size: 4.4vw;
+    border-radius: $border-radius;
+    font-weight: 500;
+    background-color: $button-bg;
+    color: $text-primary;
+    border: none;
+    cursor: pointer;
+    -webkit-tap-highlight-color: transparent;
+    user-select: none;
+    touch-action: manipulation;
+    outline: none;
+
+    @media (min-width: $medium-width) {
+        font-size: 20px;
+    }
+
+    // Only apply hover on devices that support hover (not touch devices)
+    @media (hover: hover) and (pointer: fine) {
+        transition: color 0.15s ease, background-color 0.15s ease;
+
+        &:hover:not(:disabled) {
+            color: $background-primary;
+            background-color: $text-primary;
+        }
+    }
+
+    &:active {
+        transform: scale(0.98);
+    }
+}
+
 // Calendar link button (used in App.js)
 .calendar-link-button {
     background: none;
@@ -11,10 +48,6 @@
     display: inline-block;
     margin-inline-end: 0.4em;
     text-decoration: underline;
-
-    &:hover {
-        color: $text-primary;
-    }
 }
 
 .calendar-modal-overlay {
@@ -101,26 +134,7 @@
             margin-bottom: 1rem;
 
             button {
-                display: inline-block;
-                padding: 0 0.5em;
-                line-height: 1.5em;
-                height: 1.5em;
-                font-size: 4.4vw;
-                border-radius: $border-radius;
-                font-weight: 500;
-                background-color: rgb(26, 26, 26);
-                color: $text-primary;
-                border: none;
-                cursor: pointer;
-
-                @media (min-width: $medium-width) {
-                    font-size: 20px;
-                }
-
-                &:hover {
-                    color: $background-primary;
-                    background-color: $text-primary;
-                }
+                @extend %modal-button-base;
             }
         }
 
@@ -136,6 +150,8 @@
                 padding: 0.5em;
                 background: transparent;
                 cursor: pointer;
+                -webkit-tap-highlight-color: transparent;
+                transition: background 0.15s ease;
 
                 &:hover {
                     background: rgba(255, 255, 255, 0.05);
@@ -173,23 +189,10 @@
         justify-content: center;
 
         .download-button {
+            @extend %modal-button-base;
             display: inline-flex;
             align-items: center;
             gap: 0.4em;
-            padding: 0 0.5em;
-            line-height: 1.5em;
-            height: 1.5em;
-            font-size: 4.4vw;
-            border-radius: $border-radius;
-            font-weight: 500;
-            background-color: rgb(26, 26, 26);
-            color: $text-primary;
-            border: none;
-            cursor: pointer;
-
-            @media (min-width: $medium-width) {
-                font-size: 20px;
-            }
 
             .button-icon {
                 width: 0.9em;
@@ -198,25 +201,23 @@
 
                 path {
                     fill: $text-primary;
+                    transition: fill 0.15s ease;
                 }
             }
 
-            &:hover:not(:disabled) {
-                color: $background-primary;
-                background-color: $text-primary;
-
-                .button-icon path {
+            @media (hover: hover) and (pointer: fine) {
+                &:hover:not(:disabled) .button-icon path {
                     fill: $background-primary;
                 }
             }
 
             &:disabled {
-                background-color: rgb(20, 20, 20);
-                color: rgb(80, 80, 80);
+                background-color: darken($button-bg, 5%);
+                color: rgba($text-primary, 0.3);
                 cursor: not-allowed;
 
                 .button-icon path {
-                    fill: rgb(80, 80, 80);
+                    fill: rgba($text-primary, 0.3);
                 }
             }
         }
