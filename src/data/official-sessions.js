@@ -263,7 +263,8 @@ const officials = [
         label: 'Classic Lotus Grand Prix',
         cars: ["Lotus 79"],
         links: {
-            discord: 'https://discord.gg/Kt3PZxZC98'
+            discord: 'https://discord.gg/Kt3PZxZC98',
+            broadcast: 'https://www.youtube.com/@GSRCBroadcasting'
         },
         sessions: [
             {
@@ -276,14 +277,22 @@ const officials = [
             },
             {
                 sessionDay: THU,
+                sessionTimeGmt: '18:30',
+            },
+            {
+                sessionDay: THU,
+                sessionTimeGmt: '20:30',
+            },
+            {
+                sessionDay: FRI,
                 sessionTimeGmt: '00:30',
             },
             {
-                sessionDay: THU,
+                sessionDay: FRI,
                 sessionTimeGmt: '02:30',
             },
             {
-                sessionDay: THU,
+                sessionDay: FRI,
                 sessionTimeGmt: '18:30',
             },
             {
@@ -292,6 +301,14 @@ const officials = [
             },
             {
                 sessionDay: SAT,
+                sessionTimeGmt: '14:30',
+            },
+            {
+                sessionDay: SAT,
+                sessionTimeGmt: '16:30',
+            },
+            {
+                sessionDay: SUN,
                 sessionTimeGmt: '14:30',
             },
             {
