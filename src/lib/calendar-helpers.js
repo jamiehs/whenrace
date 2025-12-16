@@ -147,7 +147,7 @@ export const generateCalendar = (series, selectedSessionIds) => {
         lines.push(`URL:https://whenrace.com/${series.seriesId}`);
         lines.push('STATUS:CONFIRMED');
         lines.push('CATEGORIES:iRacing,Sim Racing');
-        lines.push('X-MICROSOFT-CDO-BUSYSTATUS:FREE');
+        lines.push('X-MICROSOFT-CDO-BUSYSTATUS:BUSY');
         lines.push(`RRULE:FREQ=WEEKLY;UNTIL=${untilDate.format('YYYYMMDDTHHmmss')}Z;BYDAY=${ICAL_DAY_MAP[session.sessionDay]}`);
         lines.push(`DURATION:${EVENT_DURATION}`);
         lines.push('END:VEVENT');
