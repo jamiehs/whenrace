@@ -267,15 +267,31 @@ const officials = [
         },
         sessions: [
             {
-                sessionDay: SAT,
-                sessionTimeGmt: '14:30',
+                sessionDay: TUE,
+                sessionTimeGmt: '18:30',
+            },
+            {
+                sessionDay: WED,
+                sessionTimeGmt: '20:30',
+            },
+            {
+                sessionDay: THU,
+                sessionTimeGmt: '00:30',
+            },
+            {
+                sessionDay: THU,
+                sessionTimeGmt: '02:30',
+            },
+            {
+                sessionDay: THU,
+                sessionTimeGmt: '18:30',
+            },
+            {
+                sessionDay: FRI,
+                sessionTimeGmt: '20:30',
             },
             {
                 sessionDay: SAT,
-                sessionTimeGmt: '16:30',
-            },
-            {
-                sessionDay: SUN,
                 sessionTimeGmt: '14:30',
             },
             {
