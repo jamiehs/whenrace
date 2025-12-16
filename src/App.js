@@ -1,14 +1,18 @@
 import './App.scss';
-import React from 'react';
+import React, { useState } from 'react';
 import { useParams, NavLink, Link } from "react-router-dom";
 import Timeslot from './components/Timeslot/Timeslot.js';
 import {officials} from './data/official-sessions.js';
 import { ReactComponent as DiscordIcon } from './images/Discord-Logo-Color.svg';
 import { ReactComponent as LinkIcon } from './images/link.svg';
+import { ReactComponent as CalendarIcon } from './images/calendar.svg';
+import CalendarModal from './components/CalendarModal/CalendarModal.js';
 
 
 const App = () => {
     let { selected_series } = useParams();
+    const [calendarModalSeriesId, setCalendarModalSeriesId] = useState(null);
+
     const sortedOfficials = officials.slice().sort((a,b) => {
         return a.shortLabel > b.shortLabel ? 1 : -1
     })
@@ -16,8 +20,8 @@ const App = () => {
         return selected_series ? singleSeries.seriesId === selected_series : true
     })
 
-    function renderLinks(links) {
-        return Object.keys(links).map((key) => {
+    function renderLinks(links, seriesId) {
+        const linkElements = Object.keys(links).map((key) => {
             let linkLabel = ''
             let labelClasses = 'text'
             switch(key) {
@@ -43,6 +47,21 @@ const App = () => {
                 </div>
             )
         });
+
+        // Add calendar link
+        linkElements.push(
+            <div key="calendar" className="link-row">
+                <span className="label-type svg calendar"><CalendarIcon /></span>
+                <button
+                    onClick={() => setCalendarModalSeriesId(seriesId)}
+                    className="calendar-link-button"
+                >
+                    Download calendar
+                </button>
+            </div>
+        );
+
+        return linkElements;
     }
 
     return (
@@ -80,9 +99,9 @@ const App = () => {
                                     <div className="cars">
                                         {series.cars.map(car => <span key={`car.${car}`} className="car">{car}</span>)}
                                     </div>
-                                    {series.links && Object.keys(series.links).length > 0 && (
+                                    {((series.links && Object.keys(series.links).length > 0) || (series.sessions && series.sessions.length > 0)) && (
                                         <div className="links">
-                                            {renderLinks(series.links)}
+                                            {renderLinks(series.links || {}, series.seriesId)}
                                         </div>
                                     )}
                                 </header>
@@ -112,6 +131,13 @@ const App = () => {
                     })}
                 </div>
             </div>
+
+            {calendarModalSeriesId && (
+                <CalendarModal
+                    series={officials.find(s => s.seriesId === calendarModalSeriesId)}
+                    onClose={() => setCalendarModalSeriesId(null)}
+                />
+            )}
         </div>
     )
 }
