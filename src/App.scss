@@ -4,10 +4,16 @@ body {
   background: black;
   color: $text-primary;
   font-family: Inter, Roboto, 'Helvetica Neue', 'Arial Nova', 'Nimbus Sans', Arial, sans-serif;
+  overflow-x: hidden;
 }
 
 a, a:link {
   color: $text-primary;
+}
+
+.App {
+  width: 100%;
+  overflow-x: hidden;
 }
 
 #nameplate {
@@ -18,16 +24,16 @@ a, a:link {
   #nameplate-content {
     flex: 1;
     h1 {
-      position: relative;
       margin: 0;
       font-size: 6vw;
       color: black;
       font-weight: 900;
       text-align: center;
-      left: -60px;
+      transform: translateX(-30px);
 
       @media (min-width: $medium-width) {
         font-size: 50px;
+        transform: translateX(-60px);
       }
 
     }
