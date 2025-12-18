@@ -1,10 +1,18 @@
-import { useState, useMemo } from 'react';
+import { useState, useMemo, useEffect } from 'react';
 import moment from 'moment-timezone';
 import './CalendarModal.scss';
 import { downloadCalendar, getSessionId, isSpecialSession, parseTime, toIsoWeekday } from '../../lib/calendar-helpers.js';
 import { ReactComponent as CalendarIcon } from '../../images/calendar.svg';
 
 const CalendarModal = ({ series, onClose }) => {
+    // Prevent body scroll when modal is open
+    useEffect(() => {
+        document.body.style.overflow = 'hidden';
+        return () => {
+            document.body.style.overflow = '';
+        };
+    }, []);
+
     // Pre-select Broadcasted and SOF sessions, or all sessions if there's only 1
     const defaultSelected = useMemo(() => {
         const defaults = new Set();
