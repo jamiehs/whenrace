@@ -20,20 +20,23 @@ a, a:link {
   background-color: #fff;
   display: flex;
   align-items: center;
+  position: relative;
 
   #nameplate-content {
-    flex: 1;
+    position: absolute;
+    left: 0;
+    right: 0;
+    pointer-events: none;
+
     h1 {
       margin: 0;
       font-size: 6vw;
       color: black;
       font-weight: 900;
       text-align: center;
-      transform: translateX(-30px);
 
       @media (min-width: $medium-width) {
         font-size: 50px;
-        transform: translateX(-60px);
       }
 
     }
