@@ -6,19 +6,38 @@ const EVENT_DURATION = 'PT1H'; // 1 hour in ISO 8601 duration format
 const CALENDAR_REPEAT_YEARS = 1;
 
 /**
+ * Generates a unique identifier for a session
+ * @param {Object} session - Session object with sessionDay and sessionTimeGmt
+ * @returns {string} Unique session ID in format "day-time"
+ */
+export const getSessionId = (session) => `${session.sessionDay}-${session.sessionTimeGmt}`;
+
+/**
+ * Gets special tags for a session (Broadcasted, SOF)
+ * @param {Object} session - Session object with notes array
+ * @returns {Array<string>} Array of tag strings
+ */
+export const getSessionTags = (session) => {
+    const tags = [];
+    if (!session.notes) return tags;
+
+    const hasBroadcasted = session.notes.some(note => note.toLowerCase().includes('broadcasted'));
+    const hasSOF = session.notes.some(note => note.toLowerCase().includes('sof'));
+
+    if (hasBroadcasted) tags.push('Broadcasted');
+    if (hasSOF) tags.push('SOF');
+
+    return tags;
+};
+
+/**
  * Checks if a session is marked as special (Broadcasted or SOF)
  * @param {Object} session - Session object with notes array
  * @returns {boolean} True if session has Broadcasted or SOF notes
  */
 export const isSpecialSession = (session) => {
-    if (!session.notes || session.notes.length === 0) return false;
-    return session.notes.some(note => {
-        const lower = note.toLowerCase();
-        return lower.includes('broadcasted') || lower.includes('sof');
-    });
+    return getSessionTags(session).length > 0;
 };
-
-const getSessionId = (session) => `${session.sessionDay}-${session.sessionTimeGmt}`;
 
 /**
  * Parses time string into hour and minute components
@@ -36,19 +55,6 @@ export const parseTime = (timeString) => {
  * @returns {number} ISO weekday (1=Monday, ..., 7=Sunday)
  */
 export const toIsoWeekday = (day) => day === 0 ? 7 : day;
-
-const getSessionTags = (session) => {
-    const tags = [];
-    if (!session.notes) return tags;
-
-    const hasBroadcasted = session.notes.some(note => note.toLowerCase().includes('broadcasted'));
-    const hasSOF = session.notes.some(note => note.toLowerCase().includes('sof'));
-
-    if (hasBroadcasted) tags.push('Broadcasted');
-    if (hasSOF) tags.push('SOF');
-
-    return tags;
-};
 
 /**
  * Calculates the next occurrence of a weekly session
@@ -134,9 +140,8 @@ export const generateCalendar = (series, selectedSessionIds) => {
 
         // Build event name with special session indicators
         const tags = getSessionTags(session);
-        const eventName = tags.length > 0
-            ? `${series.label} – ${tags.join(', ')}`
-            : `${series.label} – Official Session`;
+        const suffix = tags.length > 0 ? tags.join(', ') : 'Official Session';
+        const eventName = `${series.label} – ${suffix}`;
 
         lines.push('BEGIN:VEVENT');
         lines.push(`UID:${series.seriesId}-${getSessionId(session)}@whenrace.com`);

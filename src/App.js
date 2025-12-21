@@ -20,7 +20,7 @@ const App = () => {
         return selected_series ? singleSeries.seriesId === selected_series : true
     })
 
-    function renderLinks(links, seriesId) {
+    function renderLinks(links, series) {
         const linkElements = Object.keys(links).map((key) => {
             let linkLabel = ''
             let labelClasses = 'text'
@@ -48,18 +48,20 @@ const App = () => {
             )
         });
 
-        // Add calendar link
-        linkElements.push(
-            <div key="calendar" className="link-row">
-                <span className="label-type svg calendar"><CalendarIcon /></span>
-                <button
-                    onClick={() => setCalendarModalSeriesId(seriesId)}
-                    className="calendar-link-button"
-                >
-                    Download calendar
-                </button>
-            </div>
-        );
+        // Add calendar link only if series has sessions
+        if (series.sessions && series.sessions.length > 0) {
+            linkElements.push(
+                <div key="calendar" className="link-row">
+                    <span className="label-type svg calendar"><CalendarIcon /></span>
+                    <button
+                        onClick={() => setCalendarModalSeriesId(series.seriesId)}
+                        className="calendar-link-button"
+                    >
+                        Download calendar
+                    </button>
+                </div>
+            );
+        }
 
         return linkElements;
     }
@@ -101,7 +103,7 @@ const App = () => {
                                     </div>
                                     {((series.links && Object.keys(series.links).length > 0) || (series.sessions && series.sessions.length > 0)) && (
                                         <div className="links">
-                                            {renderLinks(series.links || {}, series.seriesId)}
+                                            {renderLinks(series.links || {}, series)}
                                         </div>
                                     )}
                                 </header>
