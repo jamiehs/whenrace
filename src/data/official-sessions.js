@@ -81,6 +81,11 @@ const officials = [
                 sessionTimeGmt: '20:00',
                 notes: [SOF]
             },
+            {
+                sessionDay: THU,
+                sessionTimeGmt: '02:00',
+                notes: [SOF]
+            },
         ]
     },
     {
