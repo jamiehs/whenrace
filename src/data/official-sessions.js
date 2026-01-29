@@ -240,7 +240,7 @@ const officials = [
         cars: ["Lotus 49"],
         links: {
             discord: 'https://discord.gg/YnXPTatwzd',
-            broadcast: 'https://youtube.com/playlist?list=PL2b2Wswly5Jl8f3IxSXJLzaWoEA1T5p84',
+            broadcast: 'https://www.youtube.com/playlist?list=PL2b2Wswly5JnpkxzQgVl9oy36S1EgHoN2',
         },
         sessions: [
             {
