@@ -1,18 +1,18 @@
 {
   "files": {
     "main.css": "/static/css/main.b42732de.css",
-    "main.js": "/static/js/main.baaf3583.js",
+    "main.js": "/static/js/main.e80b593a.js",
     "static/js/787.7cbe22e3.chunk.js": "/static/js/787.7cbe22e3.chunk.js",
     "static/media/Discord-Logo-Color.svg": "/static/media/Discord-Logo-Color.1a0c3dc4dcc0b742fb4cadd8fd118649.svg",
     "static/media/link.svg": "/static/media/link.62e36eca28e06ad9fb43a4796ae15e52.svg",
     "index.html": "/index.html",
     "static/media/calendar.svg": "/static/media/calendar.2e12d3a554b50bb02793f15b41069b3a.svg",
     "main.b42732de.css.map": "/static/css/main.b42732de.css.map",
-    "main.baaf3583.js.map": "/static/js/main.baaf3583.js.map",
+    "main.e80b593a.js.map": "/static/js/main.e80b593a.js.map",
     "787.7cbe22e3.chunk.js.map": "/static/js/787.7cbe22e3.chunk.js.map"
   },
   "entrypoints": [
     "static/css/main.b42732de.css",
-    "static/js/main.baaf3583.js"
+    "static/js/main.e80b593a.js"
   ]
 }
