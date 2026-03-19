@@ -448,7 +448,7 @@ const officials = [
         sessions: [
             {
                 sessionDay: MON,
-                sessionTimeGmt: '20:45',
+                sessionTimeGmt: '19:45',
                 notes: [BROADCAST, SOF]
             }
         ]
