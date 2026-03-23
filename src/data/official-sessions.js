@@ -391,17 +391,24 @@ const officials = [
         },
         sessions: [
             {
-                sessionDay: MON,
-                sessionTimeGmt: '01:00',
+                sessionDay: TUE,
+                sessionTimeGmt: '23:00',
+                notes: ["Prelim.", "Sometimes Highest SOF"]
             },
             {
                 sessionDay: WED,
                 sessionTimeGmt: '01:00',
-                notes: [SOF]
+                notes: ["Feature SOF"]
+            },
+            {
+                sessionDay: THU,
+                sessionTimeGmt: '23:00',
+                notes: ["Prelim."]
             },
             {
                 sessionDay: FRI,
                 sessionTimeGmt: '01:00',
+                notes: ["Feature"]
             },
             {
                 sessionDay: SUN,
