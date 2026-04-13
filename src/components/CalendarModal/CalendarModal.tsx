@@ -66,11 +66,6 @@ const CalendarModal = ({ series, onClose }: CalendarModalProps) => {
     };
 
     const handleDownload = () => {
-        if (selectedSessions.size === 0) {
-            alert('Please select at least one session');
-            return;
-        }
-
         try {
             downloadCalendar(series, selectedSessions);
             onClose();

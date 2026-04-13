@@ -1,8 +1,9 @@
-import { describe, it, expect, beforeEach } from 'vitest';
+import { describe, it, expect, beforeEach, afterEach } from 'vitest';
 import {
     isSpecialSession,
     parseTime,
     toIsoWeekday,
+    downloadCalendar,
     getNextOccurrence,
     buildDescription,
     generateCalendar,
@@ -267,4 +268,51 @@ describe('generateCalendar', () => {
         const result = generateCalendar(seriesWithSessions, ids);
         expect(result).toContain('DURATION:PT1H');
     });
+});
+
+// ─── downloadCalendar ────────────────────────────────────────────────────────
+//
+// downloadCalendar is the one function that touches browser APIs jsdom doesn't
+// implement (URL.createObjectURL, anchor.click). We mock those at the spy level
+// rather than mocking the whole module, which keeps the real logic under test.
+
+describe('downloadCalendar', () => {
+    let clickSpy: ReturnType<typeof vi.spyOn>
+
+    beforeEach(() => {
+        // jsdom doesn't implement URL.createObjectURL / revokeObjectURL at all,
+        // so vi.spyOn would throw "does not exist". Assign vi.fn() directly instead.
+        URL.createObjectURL = vi.fn().mockReturnValue('blob:fake-url')
+        URL.revokeObjectURL = vi.fn()
+        // Spy on the prototype so every anchor element created inside the
+        // function gets the mock — we don't have a reference to it upfront.
+        clickSpy = vi.spyOn(HTMLAnchorElement.prototype, 'click').mockImplementation(() => {})
+    })
+
+    afterEach(() => {
+        vi.restoreAllMocks()
+    })
+
+    it('triggers a click on an anchor element', () => {
+        downloadCalendar(seriesWithSessions, new Set(['3-19:00']))
+        expect(clickSpy).toHaveBeenCalledTimes(1)
+    })
+
+    it('sets the correct download filename', () => {
+        const appendSpy = vi.spyOn(document.body, 'appendChild')
+        downloadCalendar(seriesWithSessions, new Set(['3-19:00']))
+        const link = appendSpy.mock.calls[0][0] as HTMLAnchorElement
+        expect(link.download).toBe('whenrace-kamel.ics')
+    })
+
+    it('removes the anchor from the DOM after clicking', () => {
+        const removeSpy = vi.spyOn(document.body, 'removeChild')
+        downloadCalendar(seriesWithSessions, new Set(['3-19:00']))
+        expect(removeSpy).toHaveBeenCalledTimes(1)
+    })
+
+    it('revokes the object URL after download to free memory', () => {
+        downloadCalendar(seriesWithSessions, new Set(['3-19:00']))
+        expect(URL.revokeObjectURL).toHaveBeenCalledWith('blob:fake-url')
+    })
 });

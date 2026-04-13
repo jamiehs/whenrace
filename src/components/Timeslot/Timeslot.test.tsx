@@ -1,12 +1,13 @@
 import timezone_mock from 'timezone-mock'
-import {nextRaceDay} from '../../helpers'
+import { render, screen, within } from '@testing-library/react'
+import { nextRaceDay } from '../../helpers'
+import Timeslot from './Timeslot'
+
+// ─── nextRaceDay (existing unit tests) ───────────────────────────────────────
 
 let summerRaceTime = ''
 let winterRaceTime = ''
 
-// At a bare minimum it should be able to tell if it's this week or next
-// this helps with the tricky weeks when DST rolls over.
-// This Saturday's race time is not always next Saturday's race time!
 describe('general date calculations', () => {
     it('returns next Saturday if after this Saturday', () => {
         let result = nextRaceDay(6, '15:00', '2022-08-01 12:00').toString()
@@ -21,7 +22,6 @@ describe('general date calculations', () => {
     });
 })
 
-// BST is a good test
 describe('British Summer Time for Saturday race', () => {
     beforeAll(() => {
         summerRaceTime = '18:00'
@@ -43,7 +43,6 @@ describe('British Summer Time for Saturday race', () => {
     });
 })
 
-// US is easy for Jamie to visualize and mentally test
 describe('US (Pacific) Daylight Saving Time for Saturday race', () => {
     beforeAll(() => {
         summerRaceTime = '10:00'
@@ -65,8 +64,6 @@ describe('US (Pacific) Daylight Saving Time for Saturday race', () => {
     });
 })
 
-// Adelaide has a :30 offset and moves the other way in winter!
-// also... the timezone_mock supports it and a few others only.
 describe('Adelaide Daylight Saving Time for Saturday race', () => {
     beforeAll(() => {
         summerRaceTime = '02:30'
@@ -86,4 +83,64 @@ describe('Adelaide Daylight Saving Time for Saturday race', () => {
         let expected = new Date(`2022-10-09 ${winterRaceTime}`).toString()
         expect(result).toBe(expected)
     });
+
+    afterAll(() => {
+        // timezone_mock patches the global Date object — always unregister
+        // after the last describe block that uses it, or it leaks into
+        // subsequent tests and causes hard-to-diagnose failures.
+        timezone_mock.unregister()
+    });
+})
+
+// ─── Timeslot component ───────────────────────────────────────────────────────
+//
+// We focus on the GMT display (always stable) rather than the local time
+// display (depends on the system timezone at test runtime).
+
+describe('Timeslot', () => {
+    // Helper: finds the GMT section container so we can scope queries to it.
+    // The local time section often shows the same day name, so searching the
+    // whole document with getByText(/Wednesday/) would find two elements and
+    // throw. within() narrows the search to one specific subtree.
+    const getGmtSection = () => screen.getByText('GMT').closest('.date-gmt')!
+
+    it('renders the GMT label', () => {
+        render(<Timeslot dayIndex={3} time="19:00" />)
+        // This one IS unique — "GMT" only appears once — so no within() needed.
+        expect(screen.getByText('GMT')).toBeInTheDocument()
+    })
+
+    it('renders the GMT day name', () => {
+        render(<Timeslot dayIndex={3} time="19:00" />)
+        expect(within(getGmtSection()).getByText(/Wednesday/)).toBeInTheDocument()
+    })
+
+    it('renders the GMT time', () => {
+        render(<Timeslot dayIndex={3} time="19:00" />)
+        expect(within(getGmtSection()).getByText(/19:00/)).toBeInTheDocument()
+    })
+
+    it('renders Saturday for dayIndex 6', () => {
+        render(<Timeslot dayIndex={6} time="03:00" />)
+        expect(within(getGmtSection()).getByText(/Saturday/)).toBeInTheDocument()
+    })
+
+    it('renders Sunday for dayIndex 0', () => {
+        render(<Timeslot dayIndex={0} time="09:00" />)
+        expect(within(getGmtSection()).getByText(/Sunday/)).toBeInTheDocument()
+    })
+
+    // Testing that something is NOT rendered uses queryByText instead of
+    // getByText. queryByText returns null when nothing is found (rather than
+    // throwing), so we can assert on that null with toBeNull().
+    it('renders no notes section when notes prop is absent', () => {
+        render(<Timeslot dayIndex={3} time="19:00" />)
+        expect(screen.queryByText('SOF Session')).toBeNull()
+    })
+
+    it('renders notes when provided', () => {
+        render(<Timeslot dayIndex={6} time="17:00" notes={['Broadcasted', 'SOF Session']} />)
+        expect(screen.getByText('Broadcasted')).toBeInTheDocument()
+        expect(screen.getByText('SOF Session')).toBeInTheDocument()
+    })
 })
