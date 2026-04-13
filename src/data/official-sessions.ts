@@ -1,3 +1,25 @@
+export interface Session {
+    sessionDay: number;
+    sessionTimeGmt: string;
+    notes?: string[];
+}
+
+export interface SeriesLinks {
+    website?: string;
+    discord?: string;
+    facebook?: string;
+    broadcast?: string;
+}
+
+export interface Series {
+    seriesId: string;
+    shortLabel: string;
+    label: string;
+    cars: string[];
+    links?: SeriesLinks;
+    sessions: Session[];
+}
+
 const SUN = 0;
 const MON = 1;
 const TUE = 2;
@@ -10,7 +32,7 @@ const SAT = 6;
 const SOF = "SOF Session"
 const BROADCAST = "Broadcasted"
 
-const officials = [
+const officials: Series[] = [
     {
         seriesId: 'kamel',
         shortLabel: 'IMSA Vintage',

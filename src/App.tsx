@@ -1,17 +1,17 @@
 import './App.scss';
 import React, { useState } from 'react';
-import { useParams, NavLink, Link } from "react-router-dom";
-import Timeslot from './components/Timeslot/Timeslot.js';
-import {officials} from './data/official-sessions.js';
-import { ReactComponent as DiscordIcon } from './images/Discord-Logo-Color.svg';
-import { ReactComponent as LinkIcon } from './images/link.svg';
-import { ReactComponent as CalendarIcon } from './images/calendar.svg';
-import CalendarModal from './components/CalendarModal/CalendarModal.js';
+import { useParams, NavLink, Link } from 'react-router-dom';
+import Timeslot from './components/Timeslot/Timeslot';
+import { officials, SeriesLinks, Series } from './data/official-sessions';
+import DiscordIcon from './images/Discord-Logo-Color.svg?react';
+import LinkIcon from './images/link.svg?react';
+import CalendarIcon from './images/calendar.svg?react';
+import CalendarModal from './components/CalendarModal/CalendarModal';
 
 
 const App = () => {
-    let { selected_series } = useParams();
-    const [calendarModalSeriesId, setCalendarModalSeriesId] = useState(null);
+    let { selected_series } = useParams<{ selected_series?: string }>();
+    const [calendarModalSeriesId, setCalendarModalSeriesId] = useState<string | null>(null);
 
     const sortedOfficials = officials.slice().sort((a,b) => {
         return a.shortLabel > b.shortLabel ? 1 : -1
@@ -20,9 +20,9 @@ const App = () => {
         return selected_series ? singleSeries.seriesId === selected_series : true
     })
 
-    function renderLinks(links, series) {
-        const linkElements = Object.keys(links).map((key) => {
-            let linkLabel = ''
+    function renderLinks(links: SeriesLinks, series: Series) {
+        const linkElements = (Object.keys(links) as Array<keyof SeriesLinks>).map((key) => {
+            let linkLabel: React.ReactNode = ''
             let labelClasses = 'text'
             switch(key) {
                 case 'website':
@@ -136,7 +136,7 @@ const App = () => {
 
             {calendarModalSeriesId && (
                 <CalendarModal
-                    series={officials.find(s => s.seriesId === calendarModalSeriesId)}
+                    series={officials.find(s => s.seriesId === calendarModalSeriesId)!}
                     onClose={() => setCalendarModalSeriesId(null)}
                 />
             )}

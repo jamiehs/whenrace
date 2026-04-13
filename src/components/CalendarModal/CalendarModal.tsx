@@ -1,10 +1,16 @@
 import { useState, useMemo, useEffect } from 'react';
 import moment from 'moment-timezone';
 import './CalendarModal.scss';
-import { downloadCalendar, getSessionId, isSpecialSession, parseTime, toIsoWeekday } from '../../lib/calendar-helpers.js';
-import { ReactComponent as CalendarIcon } from '../../images/calendar.svg';
+import { downloadCalendar, getSessionId, isSpecialSession, parseTime, toIsoWeekday } from '../../lib/calendar-helpers';
+import CalendarIcon from '../../images/calendar.svg?react';
+import { Series } from '../../data/official-sessions';
 
-const CalendarModal = ({ series, onClose }) => {
+interface CalendarModalProps {
+    series: Series;
+    onClose: () => void;
+}
+
+const CalendarModal = ({ series, onClose }: CalendarModalProps) => {
     // Prevent body scroll when modal is open
     useEffect(() => {
         document.body.style.overflow = 'hidden';
@@ -15,7 +21,7 @@ const CalendarModal = ({ series, onClose }) => {
 
     // Pre-select Broadcasted and SOF sessions, or all sessions if there's only 1
     const defaultSelected = useMemo(() => {
-        const defaults = new Set();
+        const defaults = new Set<string>();
 
         // If there's only 1 session, select it by default
         if (series.sessions.length === 1) {
@@ -37,7 +43,7 @@ const CalendarModal = ({ series, onClose }) => {
     // Check if all sessions are selected
     const allSelected = selectedSessions.size > 0 && selectedSessions.size === series.sessions.length;
 
-    const toggleSession = (sessionId) => {
+    const toggleSession = (sessionId: string) => {
         const newSet = new Set(selectedSessions);
         if (newSet.has(sessionId)) {
             newSet.delete(sessionId);
@@ -47,15 +53,13 @@ const CalendarModal = ({ series, onClose }) => {
         setSelectedSessions(newSet);
     };
 
-    const toggleSelectAll = (e) => {
+    const toggleSelectAll = (e: React.MouseEvent<HTMLButtonElement>) => {
         // Blur the button to prevent it from staying focused on iOS
         e.currentTarget.blur();
 
         if (allSelected) {
-            // If all are selected, deselect all
             setSelectedSessions(new Set());
         } else {
-            // Otherwise, select all
             const allSessionIds = series.sessions.map(getSessionId);
             setSelectedSessions(new Set(allSessionIds));
         }
@@ -71,13 +75,13 @@ const CalendarModal = ({ series, onClose }) => {
             downloadCalendar(series, selectedSessions);
             onClose();
         } catch (error) {
-            alert(error.message || 'Error generating calendar. Please try again.');
+            alert(error instanceof Error ? error.message : 'Error generating calendar. Please try again.');
         }
     };
 
     // Convert GMT times to user's local time (memoized per session)
-    const sessionTimeMap = useMemo(() => {
-        const map = new Map();
+    const localTimeInfoMap = useMemo(() => {
+        const map = new Map<string, { dayName: string; time: string }>();
         const userTimezone = moment.tz.guess();
 
         series.sessions.forEach(session => {
@@ -123,7 +127,7 @@ const CalendarModal = ({ series, onClose }) => {
                         {series.sessions.map(session => {
                             const sessionId = getSessionId(session);
                             const isSelected = selectedSessions.has(sessionId);
-                            const timeInfo = sessionTimeMap.get(sessionId);
+                            const timeInfo = localTimeInfoMap.get(sessionId);
 
                             return (
                                 <label key={sessionId} className="session-item">
@@ -133,7 +137,7 @@ const CalendarModal = ({ series, onClose }) => {
                                         onChange={() => toggleSession(sessionId)}
                                     />
                                     <span className="session-info">
-                                        {timeInfo.dayName} {timeInfo.time}
+                                        {timeInfo?.dayName} {timeInfo?.time}
                                         {session.notes && session.notes.length > 0 && (
                                             <span className="session-notes"> • {session.notes.join(', ')}</span>
                                         )}

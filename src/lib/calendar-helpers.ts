@@ -1,4 +1,5 @@
 import moment from 'moment-timezone';
+import { Series, Session } from '../data/official-sessions';
 
 // ICS format constants
 const ICAL_DAY_MAP = ['SU', 'MO', 'TU', 'WE', 'TH', 'FR', 'SA'];
@@ -7,18 +8,14 @@ const CALENDAR_REPEAT_YEARS = 1;
 
 /**
  * Generates a unique identifier for a session
- * @param {Object} session - Session object with sessionDay and sessionTimeGmt
- * @returns {string} Unique session ID in format "day-time"
  */
-export const getSessionId = (session) => `${session.sessionDay}-${session.sessionTimeGmt}`;
+export const getSessionId = (session: Session): string => `${session.sessionDay}-${session.sessionTimeGmt}`;
 
 /**
  * Gets special tags for a session (Broadcasted, SOF)
- * @param {Object} session - Session object with notes array
- * @returns {Array<string>} Array of tag strings
  */
-export const getSessionTags = (session) => {
-    const tags = [];
+export const getSessionTags = (session: Session): string[] => {
+    const tags: string[] = [];
     if (!session.notes) return tags;
 
     const hasBroadcasted = session.notes.some(note => note.toLowerCase().includes('broadcasted'));
@@ -32,41 +29,32 @@ export const getSessionTags = (session) => {
 
 /**
  * Checks if a session is marked as special (Broadcasted or SOF)
- * @param {Object} session - Session object with notes array
- * @returns {boolean} True if session has Broadcasted or SOF notes
  */
-export const isSpecialSession = (session) => {
+export const isSpecialSession = (session: Session): boolean => {
     return getSessionTags(session).length > 0;
 };
 
 /**
  * Parses time string into hour and minute components
- * @param {string} timeString - Time in HH:MM format
- * @returns {Object} Object with hour and minute properties
  */
-export const parseTime = (timeString) => {
+export const parseTime = (timeString: string): { hour: number; minute: number } => {
     const [hour, minute] = timeString.split(':').map(Number);
     return { hour, minute };
 };
 
 /**
  * Converts day of week to ISO weekday format (Sunday: 0→7)
- * @param {number} day - Day of week (0=Sunday, 1=Monday, ..., 6=Saturday)
- * @returns {number} ISO weekday (1=Monday, ..., 7=Sunday)
  */
-export const toIsoWeekday = (day) => day === 0 ? 7 : day;
+export const toIsoWeekday = (day: number): number => day === 0 ? 7 : day;
 
 /**
  * Calculates the next occurrence of a weekly session
- * @param {number} sessionDay - Day of week (0=Sunday, 1=Monday, ..., 6=Saturday)
- * @param {string} sessionTime - Time in HH:MM format
- * @returns {moment.Moment} Next occurrence in GMT
  */
-export const getNextOccurrence = (sessionDay, sessionTime) => {
+export const getNextOccurrence = (sessionDay: number, sessionTime: string): moment.Moment => {
     const now = moment.tz('GMT');
     const { hour, minute } = parseTime(sessionTime);
 
-    let next = now.clone()
+    const next = now.clone()
         .isoWeekday(toIsoWeekday(sessionDay))
         .hour(hour)
         .minute(minute)
@@ -82,12 +70,9 @@ export const getNextOccurrence = (sessionDay, sessionTime) => {
 
 /**
  * Builds the event description text for ICS calendar
- * @param {Object} series - Series object with label, cars, and links
- * @param {Object} session - Session object with notes
- * @returns {string} Formatted description text
  */
-export const buildDescription = (series, session) => {
-    const parts = [];
+export const buildDescription = (series: Series, session: Session): string => {
+    const parts: string[] = [];
 
     parts.push(series.label);
     parts.push(`Cars: ${series.cars.join(', ')}`);
@@ -111,12 +96,9 @@ export const buildDescription = (series, session) => {
 
 /**
  * Generates an ICS calendar file content for selected sessions
- * @param {Object} series - Series object with sessions and metadata
- * @param {Set<string>} selectedSessionIds - Set of session IDs to include
- * @returns {string} ICS calendar file content
  * @throws {Error} If no sessions are selected
  */
-export const generateCalendar = (series, selectedSessionIds) => {
+export const generateCalendar = (series: Series, selectedSessionIds: Set<string>): string => {
     if (!selectedSessionIds || selectedSessionIds.size === 0) {
         throw new Error('Please select at least one session');
     }
@@ -165,11 +147,9 @@ export const generateCalendar = (series, selectedSessionIds) => {
 
 /**
  * Generates and downloads an ICS calendar file for selected sessions
- * @param {Object} series - Series object with sessions and metadata
- * @param {Set<string>} selectedSessionIds - Set of session IDs to include
  * @throws {Error} If calendar generation or download fails
  */
-export const downloadCalendar = (series, selectedSessionIds) => {
+export const downloadCalendar = (series: Series, selectedSessionIds: Set<string>): void => {
     const icsContent = generateCalendar(series, selectedSessionIds);
 
     const blob = new Blob([icsContent], { type: 'text/calendar;charset=utf-8' });

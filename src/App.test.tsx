@@ -1,6 +1,6 @@
 import { render, screen } from '@testing-library/react';
 import App from './App';
 
-xit('renders without crashing', () => {
+it.skip('renders without crashing', () => {
   render(<App />);
 });
