@@ -112,17 +112,25 @@ describe('CalendarModal interactions', () => {
         checkboxes.forEach(cb => expect(cb).toBeChecked())
     })
 
-    it('Select None unchecks every session', async () => {
+    it('Select All button becomes Deselect All when all sessions are checked', async () => {
         render(<CalendarModal series={mockSeries} onClose={() => {}} />)
-        await userEvent.click(screen.getByRole('button', { name: 'Select None' }))
+        await userEvent.click(screen.getByRole('button', { name: 'Select All' }))
+        expect(screen.getByRole('button', { name: 'Deselect All' })).toBeInTheDocument()
+    })
+
+    it('Deselect All unchecks every session', async () => {
+        render(<CalendarModal series={mockSeries} onClose={() => {}} />)
+        await userEvent.click(screen.getByRole('button', { name: 'Select All' }))
+        await userEvent.click(screen.getByRole('button', { name: 'Deselect All' }))
 
         const checkboxes = screen.getAllByRole('checkbox')
         checkboxes.forEach(cb => expect(cb).not.toBeChecked())
     })
 
-    it('download button is disabled after Select None', async () => {
+    it('download button is disabled after Deselect All', async () => {
         render(<CalendarModal series={mockSeries} onClose={() => {}} />)
-        await userEvent.click(screen.getByRole('button', { name: 'Select None' }))
+        await userEvent.click(screen.getByRole('button', { name: 'Select All' }))
+        await userEvent.click(screen.getByRole('button', { name: 'Deselect All' }))
         expect(screen.getByRole('button', { name: /Download Calendar/ })).toBeDisabled()
     })
 
