@@ -535,6 +535,37 @@ const officials: Series[] = [
             },
         ]
     },
+    {
+        seriesId: 'Euronascar',
+        shortLabel: 'Euro NASCAR',
+        label: 'NASCAR Euro Series',
+        cars: ["EURO NASCAR V8GP"],
+        links: {
+            discord: 'https://discord.gg/ANarqbj3vJ',
+        },
+        sessions: [
+            {
+                sessionDay: TUE,
+                sessionTimeGmt: '00:15',
+                notes: [SOF]
+            },
+            {
+                sessionDay: TUE,
+                sessionTimeGmt: '19:15',
+                notes: [SOF]
+            },
+            {
+                sessionDay: THU,
+                sessionTimeGmt: '00:15',
+                notes: [SOF]
+            },
+            {
+                sessionDay: SUN,
+                sessionTimeGmt: '20:15',
+                notes: [SOF]
+            },
+        ]
+    }
 ]
 
 export {
