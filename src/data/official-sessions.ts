@@ -550,11 +550,6 @@ const officials: Series[] = [
                 notes: [SOF]
             },
             {
-                sessionDay: TUE,
-                sessionTimeGmt: '19:15',
-                notes: [SOF]
-            },
-            {
                 sessionDay: THU,
                 sessionTimeGmt: '00:15',
                 notes: [SOF]
@@ -564,6 +559,11 @@ const officials: Series[] = [
                 sessionTimeGmt: '20:15',
                 notes: [SOF]
             },
+                        {
+                sessionDay: MON,
+                sessionTimeGmt: '10:15',
+                notes: [SOF]
+            }
         ]
     }
 ]
