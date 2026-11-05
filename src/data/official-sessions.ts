@@ -77,15 +77,18 @@ const officials: Series[] = [
         cars: ["HPD ARX 01c", "Aston Martin DBR9 GT1", "Corvette C6.R GT1", "Ford GT GT2"],
         links: {
             discord: 'https://discord.gg/jWCPZ8dtnB',
+            broadcast: 'https://www.youtube.com/@FireballTalksNASCAR/featured'
         },
         sessions: [
             {
                 sessionDay: THU,
                 sessionTimeGmt: '19:45',
+                notes: [SOF]
             },
             {
                 sessionDay: SUN,
                 sessionTimeGmt: '19:45',
+                notes: [SOF, BROADCAST]
             },
         ]
     },
